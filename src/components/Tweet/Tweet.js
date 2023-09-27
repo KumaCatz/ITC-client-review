@@ -1,13 +1,12 @@
 import './Tweet.css'
 
-const Tweet = ({ user, text, date, email }) => {
+const Tweet = ({ user, text, date }) => {
     
     return (
         <div className="tweet">
             <div className="line">
                 <div>{user}</div>
                 <div>{date}</div>
-                <div>{email}</div>
             </div>
             <div className='text'>{text}</div>
         </div>
