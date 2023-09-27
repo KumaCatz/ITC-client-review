@@ -1,89 +1,75 @@
 import './Signup.css'
+// import { useState } from "react";
 import Btn from '../../UIKit/Elements/Btn/Btn';
 import React, { useState } from 'react';
-import { useAuth } from '../../components/useAuth';
 
-const Signup = ({setIsUser}) => {
-  const { signup } = useAuth();
-  const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-  
-  
+const Signup = () => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
 
-  const handleSignup = async (e) => {
-    setIsUser(true)
-    localStorage.setItem('isUser', true);
-    e.preventDefault()
-    try {
-      
-      const response = await fetch('https://64be4a645ee688b6250c2373.mockapi.io/accounts', {
-        method: 'POST',
-        body: JSON.stringify(credentials),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+    };
 
-      if (response.ok) {
-       
-        const userData = await response.json();
-        signup(userData);
-      } else {
-        
-      }
-    } catch (error) {
-      
+  const handleSubmit=async (e)=>{
+        e.preventDefault();
+
+        const { email, password } = formData;
+
+        try {
+        const response = await fetch('https://64be4a645ee688b6250c2373.mockapi.io/:Tweets', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+            // Handle success
+            console.log('Data posted successfully');
+        } else {
+            // Handle errors
+            console.error('Error posting data');
+        }
+        } catch (error) {
+        console.error('Error posting data:', error);
+        }
     }
-  };
 
   return (
-    <div classname="signup">
-        <h2>Signup</h2>
-        <form className='signup-form' onSubmit={handleSignup}>
-      
-        <div>
-          <label className='signup-label1'>Email:</label>
-          <input className='signup-input1'
-            type="email"
-            
-            value={credentials.email}
-            onChange={(e) =>
-              setCredentials({ ...credentials, email: e.target.value })
-            }
-            required
-            
-          />
-        </div>
-       <div>
-          <label className='signup-label2'>Password:</label>
-          <input className='signup-input2'
-            type="password"
-            
-            value={credentials.password}
-            onChange={(e) =>
-              setCredentials({ ...credentials, password: e.target.value })
-            }
-            required
-          />
-       </div>
-       <div>
-        <label className='signup-label3'>Confirm:</label>
-        <input className='signup-input3'
-        type="password"
-        placeholder="Confirm Password"
-        value={credentials.confirmPassword}
-        onChange={(e) =>
-          setCredentials({ ...credentials, confirmPassword: e.target.value })
-        }
-        required
+    <div classname='signup'>
+        <div>Sign-up</div>
+        <form className='signup-form' onSubmit={handleSubmit}>
+      <h2>Sign-up</h2>
+      <div>
+        <label className='signup-label1'>Email:</label>
+        <input className='signup-input1'
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
         />
-       </div>
+      </div>
+      <div>
+        <label className='signup-label2'>Password:</label>
+        <input className='signup-input2'
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
       <div classname='btns-container'>
-        <Btn >Signup</Btn>
-        
+        <Btn type="submit">Login</Btn>
 
       </div>
       

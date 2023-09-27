@@ -39,14 +39,14 @@ const CreateTweet = ({isUser}) => {
     return (
         <form onSubmit={handleSubmit} className="CreateTweet">
             <TextareaAutosize
-                placeholder="Something on your mind?"
+                placeholder="How was our product? Do not forget to input the serial number of the product"
                 value={content}
                 onChange={handleTextAreaChange}
             ></TextareaAutosize>
             <div className='tweet-footer' style={footerStyle}>
                 {noUser ? <div className='message'>Please select Username in Profile.</div> : ''}
-                {btnDisabled && <div className='message'>The tweet can't contain more than 140 chars.</div>}
-                <Btn disabled={btnDisabled} className="add-button">Tweet</Btn>
+                {btnDisabled && <div className='message'>The Review can't contain more than 140 chars.</div>}
+                <Btn disabled={btnDisabled} className="add-button">Send</Btn>
             </div>
         </form>
     );

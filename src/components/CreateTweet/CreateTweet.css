@@ -15,8 +15,8 @@ textarea{
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-    color: #CCCCCC;
-    background-color: #15202B;
+    color: #fffdfd;
+    background-color: #ffffff;
     width: 564px;
   }
   textarea:focus{
