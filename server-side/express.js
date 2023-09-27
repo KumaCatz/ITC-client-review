@@ -7,13 +7,15 @@ app.use(cors({
 }));
 app.use(express.json());
 
+//routes
+app.use('/database', require('./routes/db.routes'));
+
 //error handling 
 app.use((err, req, res, next) => {
     console.log(err);
 
     try {
         const [statusCode, msg] = err;
-
         res.status(statusCode).send({
             error: true,
             message: msg

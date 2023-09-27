@@ -50,14 +50,10 @@ class DB {
 
     deleteById = (id) => {
         const arr = this.getData();
-
         const itemIndex = arr.findIndex(u => u.id === id);
-
         arr.splice(itemIndex, 1);
-
         this.saveData(arr);
     }
 }
-
 
 module.exports = DB;
